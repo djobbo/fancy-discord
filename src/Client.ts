@@ -13,7 +13,7 @@ export class Client extends DiscordClient {
         this.commandPrefix = commandPrefix ?? '';
     }
 
-    cmd(path: string, ...callbacks: CommandCallback[]) {
+    cmd(path: string, ...callbacks: CommandCallback[]): void {
         const { validators, queryBuilder, callbackSuite } = commandParser(path, ...callbacks);
 
         this.on('message', (message) => {

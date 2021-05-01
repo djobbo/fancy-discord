@@ -23,37 +23,39 @@ export const commandParser = (
     };
 };
 
-const getValidators = (pathArgs: string[]): CommandArgValidator[] => {
-    return pathArgs.map<CommandArgValidator>((pathArg) => {
-        if (pathArg.startsWith('[')) {
-            if (pathArg.endsWith(']')) return (arg?: string): boolean => !!arg;
-            if (pathArg.endsWith(']?')) return (): boolean => true;
-        }
+export const getValidator = (pathArg: string): CommandArgValidator => {
+    if (pathArg.startsWith('[')) {
+        if (pathArg.endsWith(']')) return (arg?: string): boolean => !!arg;
+        if (pathArg.endsWith(']?')) return (): boolean => true;
+    }
 
-        return (arg?: string): boolean => arg === pathArg;
-    });
+    return (arg?: string): boolean => arg === pathArg;
 };
 
-const getQueryBuilder = (pathArgs: string[]): CommandQueryBuilder =>
-    pathArgs.map<CommandQueryBuilderReducer>((pathArg) => {
-        if (pathArg.startsWith('[')) {
-            if (pathArg.endsWith(']'))
-                return (query: CommandQuery, arg: string) => ({
-                    ...query,
-                    [pathArg.substr(1, pathArg.length - 2)]: arg,
-                });
+const getValidators = (pathArgs: string[]): CommandArgValidator[] => pathArgs.map<CommandArgValidator>(getValidator);
 
-            if (pathArg.endsWith(']?'))
-                return (query: CommandQuery, arg: string) => ({
-                    ...query,
-                    [pathArg.substr(1, pathArg.length - 3)]: arg,
-                });
-        }
+export const getQueryBuilderReducer = (pathArg: string): CommandQueryBuilderReducer => {
+    if (pathArg.startsWith('[')) {
+        if (pathArg.endsWith(']'))
+            return (query: CommandQuery, arg?: string) => ({
+                ...query,
+                [pathArg.substr(1, pathArg.length - 2)]: arg,
+            });
 
-        return (query: CommandQuery) => query;
-    }, {});
+        if (pathArg.endsWith(']?'))
+            return (query: CommandQuery, arg?: string) => ({
+                ...query,
+                [pathArg.substr(1, pathArg.length - 3)]: arg,
+            });
+    }
 
-const getCallbackSuite = (callbacks: CommandCallback[]): CommandCallback => (req) =>
+    return (query: CommandQuery) => query;
+};
+
+export const getQueryBuilder = (pathArgs: string[]): CommandQueryBuilder =>
+    pathArgs.map<CommandQueryBuilderReducer>(getQueryBuilderReducer, {});
+
+export const getCallbackSuite = (callbacks: CommandCallback[]): CommandCallback => (req) =>
     callbacks.reduceRight<CommandCallback>(
         (callback, current) => () => current(req, () => callback(req)),
         () => ({}),

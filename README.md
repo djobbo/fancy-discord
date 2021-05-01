@@ -8,8 +8,7 @@ It adds some neat features, like an express-like syntax for commands.
 
 **Node.js 14.0.0 or newer is required.**
 
-`discord.js` **must** be installed alongside `fancy-discord.js`.  
-`npm install discord.js fancy-discord.js`
+`npm install fancy-discord.js` or `yarn add fancy-discord.js`
 
 ## Example usage
 
