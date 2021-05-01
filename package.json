@@ -1,8 +1,17 @@
 {
     "name": "fancy-discord.js",
     "version": "0.1.0",
+    "description": "discord.js, but fancier.",
     "main": "dist/index.js",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AlfieGoldson/fancy-discord.git"
+    },
+    "keywords": [],
+    "author": {
+        "name": "AlfieGoldson"
+    },
     "scripts": {
         "build": "tsc",
         "dev": "ts-node-dev",
@@ -25,5 +34,9 @@
     },
     "dependencies": {
         "discord.js": "^12.5.3"
-    }
+    },
+    "bugs": {
+        "url": "https://github.com/AlfieGoldson/fancy-discord/issues"
+    },
+    "homepage": "https://github.com/AlfieGoldson/fancy-discord#readme"
 }
