@@ -19,8 +19,9 @@
     },
     "scripts": {
         "build": "tsc",
-        "dev": "ts-node-dev",
-        "lint": "eslint '*/**/*.ts' --fix --ignore-path .eslintignore",
+        "watch": "tsc -w",
+        "dev": "ts-node-dev src/index.ts",
+        "lint": "eslint '*/**/*.{ts,tsx}' --fix --ignore-path .eslintignore",
         "typecheck": "tsc --noemit",
         "test": "jest --coverage",
         "prepare": "yarn build",
