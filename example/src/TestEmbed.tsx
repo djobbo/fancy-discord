@@ -1,4 +1,4 @@
-import { React, Embed, EmbedWrapper } from '../../lib';
+import { React, Embed } from '../../lib';
 
 interface TestEmbedProps {
     color: string;
@@ -7,7 +7,7 @@ interface TestEmbedProps {
     repeat: number;
 }
 
-export const TestEmbed = ({ color, title, name, repeat }: TestEmbedProps): EmbedWrapper => (
+export const TestEmbed = ({ color, title, name, repeat }: TestEmbedProps): Embed.EmbedWrapper => (
     <Embed.wrapper>
         <Embed.title>{title}</Embed.title>
         <Embed.color hex={color} />
@@ -20,7 +20,7 @@ export const TestEmbed = ({ color, title, name, repeat }: TestEmbedProps): Embed
             description de fou {name}! <Embed.span bold>Bold</Embed.span>
         </Embed.description>
         {Array.from({ length: repeat }, (_, i) => (
-            <Embed.field title={`Field Title ${i}`}>
+            <Embed.field title={`Field Title ${i}`} inline={i < 2}>
                 XD
                 <Embed.br />
                 <Embed.span italic>Italic!!! {name}</Embed.span>{' '}
