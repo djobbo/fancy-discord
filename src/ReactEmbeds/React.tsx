@@ -1,16 +1,19 @@
 import { MessageEmbed } from 'discord.js';
 
+type Key = string | null;
+
 export interface IEmbedElement {
     type: string;
     props: {
         children?: unknown[];
     };
+    key: Key;
 }
 
 export interface EmbedWrapper extends IEmbedElement {
-    type: 'embed';
+    type: 'wrapper';
     props: {
-        children: EmbedChildElement[];
+        children: (EmbedChildElement | EmbedChildElement[])[];
     };
 }
 
@@ -71,7 +74,7 @@ export interface EmbedField extends IEmbedElement {
 
 export type EmbedChildElement = EmbedTitle | EmbedColor | EmbedDescription | EmbedField;
 export type EmbedElement = EmbedWrapper | EmbedChildElement;
-export type EmbedTextElement = string | EmbedLineBreak | EmbedSpan | EmbedLink;
+export type EmbedTextElement = string | EmbedLineBreak | EmbedSpan | EmbedLink | EmbedTextElement[];
 
 export type EmbedComponent<T extends EmbedWrapper | EmbedChildElement> = (props: T['props']) => T;
 
@@ -80,9 +83,10 @@ const renderTextElementGroup = (textElGroup: EmbedTextElement[]) => textElGroup.
 const renderTextElement = (el: EmbedTextElement): string => {
     if (typeof el === 'string') return el;
 
+    if (Array.isArray(el)) return renderTextElementGroup(el);
+
     switch (el.type) {
         case 'br':
-            console.log('br');
             return '\n';
         case 'span': {
             const { bold, italic, children } = el.props;
@@ -98,16 +102,15 @@ const renderTextElement = (el: EmbedTextElement): string => {
     }
 };
 
-const renderChild = (el: EmbedChildElement): ((embed: MessageEmbed) => MessageEmbed) => {
+const renderChild = (el: EmbedChildElement | EmbedChildElement[]): ((embed: MessageEmbed) => void) => {
+    if (Array.isArray(el)) return (embed) => el.forEach((child) => renderChild(child)(embed));
+
     switch (el.type) {
         case 'title':
-            console.log('title', el.props.children);
             return (embed) => embed.setTitle(renderTextElementGroup(el.props.children));
         case 'color':
-            console.log('hex', el.props.hex);
             return (embed) => embed.setColor(el.props.hex);
         case 'description':
-            console.log('description', el.props.children);
             return (embed) => embed.setDescription(renderTextElementGroup(el.props.children));
         case 'field': {
             const { title, children, inline } = el.props;
@@ -137,10 +140,11 @@ export const React = {
 export const Embed = {
     wrapper: ({ children }: { children?: EmbedChildElement[] }): EmbedWrapper => {
         return {
-            type: 'embed',
+            type: 'wrapper',
             props: {
                 children: children ?? [],
             },
+            key: null,
         };
     },
     title: ({ children }: { children?: EmbedTextElement[] }): EmbedTitle => {
@@ -149,6 +153,7 @@ export const Embed = {
             props: {
                 children: children ?? [''],
             },
+            key: null,
         };
     },
     color: ({ hex }: { hex: string }): EmbedColor => {
@@ -158,6 +163,7 @@ export const Embed = {
                 hex,
                 children: [],
             },
+            key: null,
         };
     },
     // createdAt
@@ -167,6 +173,7 @@ export const Embed = {
             props: {
                 children: children ?? [''],
             },
+            key: null,
         };
     },
     field: ({
@@ -185,6 +192,7 @@ export const Embed = {
                 title: typeof title === 'string' ? [title] : title,
                 inline,
             },
+            key: null,
         };
     },
     br: (): EmbedLineBreak => {
@@ -193,6 +201,7 @@ export const Embed = {
             props: {
                 children: [],
             },
+            key: null,
         };
     },
     span: ({
@@ -211,6 +220,7 @@ export const Embed = {
                 bold,
                 italic,
             },
+            key: null,
         };
     },
     link: ({ children, href }: { children?: EmbedTextElement[]; href: string }): EmbedLink => {
@@ -220,28 +230,7 @@ export const Embed = {
                 children: children ?? [''],
                 href,
             },
+            key: null,
         };
     },
 };
-
-const TestEmbed = ({ color, title, name }: { color: string; title: string; name: string }): EmbedWrapper => (
-    <Embed.wrapper>
-        <Embed.title>{title}</Embed.title>
-        <Embed.color hex={color} />
-        <Embed.description>
-            <Embed.span bold italic>
-                Yo
-            </Embed.span>{' '}
-            c'est une
-            <Embed.br />
-            description de fou {name}! <Embed.span bold>Bold</Embed.span>
-        </Embed.description>
-        <Embed.field title="Field Title">
-            XD
-            <Embed.br />
-            <Embed.span italic>Italic!!! {name}</Embed.span> <Embed.link href="https://google.com">Hello</Embed.link>
-        </Embed.field>
-    </Embed.wrapper>
-);
-
-console.log(createEmbed(<TestEmbed color="#dd2222" title="EZ" name="JAAJ" />));
