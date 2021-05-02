@@ -5,9 +5,10 @@ interface TestEmbedProps {
     title: string;
     name: string;
     repeat: number;
+    icon?: string | null;
 }
 
-export const TestEmbed = ({ color, title, name, repeat }: TestEmbedProps): Embed.EmbedWrapper => (
+export const TestEmbed = ({ color, title, name, repeat, icon }: TestEmbedProps): Embed.EmbedWrapper => (
     <Embed.wrapper>
         <Embed.title>{title}</Embed.title>
         <Embed.color hex={color} />
@@ -19,6 +20,7 @@ export const TestEmbed = ({ color, title, name, repeat }: TestEmbedProps): Embed
             <Embed.br />
             description de fou {name}! <Embed.span bold>Bold</Embed.span>
         </Embed.description>
+        {icon && <Embed.image url={icon} />}
         {Array.from({ length: repeat }, (_, i) => (
             <Embed.field title={`Field Title ${i}`} inline={i < 2}>
                 XD
@@ -27,5 +29,6 @@ export const TestEmbed = ({ color, title, name, repeat }: TestEmbedProps): Embed
                 <Embed.link href="https://google.com">Hello</Embed.link>
             </Embed.field>
         ))}
+        <Embed.footer iconUrl={icon || undefined}>This is a footer</Embed.footer>
     </Embed.wrapper>
 );

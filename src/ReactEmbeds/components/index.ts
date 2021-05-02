@@ -10,3 +10,4 @@ export * from './link';
 export * from './image';
 export * from './timestamp';
 export * from './url';
+export * from './footer';

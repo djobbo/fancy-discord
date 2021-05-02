@@ -8,6 +8,11 @@ import {
     EmbedLineBreak,
     EmbedLink,
     EmbedSpan,
+    EmbedImage,
+    EmbedTimestamp,
+    EmbedURL,
+    EmbedAuthor,
+    EmbedFooter,
 } from './components';
 
 type Key = string | null;
@@ -20,11 +25,24 @@ export interface IEmbedElement {
     key: Key;
 }
 
-export type EmbedChildElement = EmbedTitle | EmbedColor | EmbedDescription | EmbedField;
-export type EmbedElement = EmbedWrapper | EmbedChildElement;
-export type EmbedTextElement = string | EmbedLineBreak | EmbedSpan | EmbedLink | EmbedTextElement[];
+export type EmbedChildElement =
+    | EmbedTitle
+    | EmbedColor
+    | EmbedDescription
+    | EmbedField
+    | EmbedImage
+    | EmbedTimestamp
+    | EmbedURL
+    | EmbedAuthor
+    | EmbedFooter;
 
-export type EmbedComponent<T extends EmbedWrapper | EmbedChildElement> = (props: T['props']) => T;
+export type EmbedElement = EmbedWrapper | EmbedChildElement;
+export type EmbedTextComponent = EmbedLineBreak | EmbedSpan | EmbedLink;
+export type EmbedTextElement = string | EmbedTextComponent | EmbedTextElement[];
+
+export type EmbedComponent<T extends EmbedWrapper | EmbedChildElement | EmbedTextComponent> = (
+    props: Omit<T['props'], 'children'> & { children?: T['props']['children'] },
+) => T;
 
 export type RenderChildFn<T extends EmbedChildElement | EmbedChildElement[]> = (el: T) => (embed: MessageEmbed) => void;
 export type RenderTextFn<T extends EmbedTextElement> = (el: T) => string;

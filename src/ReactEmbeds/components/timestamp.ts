@@ -1,4 +1,4 @@
-import { IEmbedElement } from '../types';
+import { IEmbedElement, RenderChildFn } from '../types';
 
 export interface EmbedTimestamp extends IEmbedElement {
     type: 'timestamp';
@@ -7,6 +7,11 @@ export interface EmbedTimestamp extends IEmbedElement {
         children: [];
     };
 }
+
+export const renderTimestamp: RenderChildFn<EmbedTimestamp> = (el) => {
+    const { timestamp } = el.props;
+    return (embed) => embed.setTimestamp(timestamp);
+};
 
 export const timestamp = ({ timestamp }: { timestamp: number | Date }): EmbedTimestamp => {
     return {

@@ -1,4 +1,4 @@
-import { IEmbedElement } from '../types';
+import { IEmbedElement, RenderChildFn } from '../types';
 
 export interface EmbedImage extends IEmbedElement {
     type: 'image';
@@ -7,6 +7,11 @@ export interface EmbedImage extends IEmbedElement {
         children: [];
     };
 }
+
+export const renderImage: RenderChildFn<EmbedImage> = (el) => {
+    const { url } = el.props;
+    return (embed) => embed.setImage(url);
+};
 
 export const image = ({ url }: { url: string }): EmbedImage => {
     return {

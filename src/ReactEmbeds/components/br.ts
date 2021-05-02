@@ -1,15 +1,15 @@
-import { IEmbedElement, RenderTextFn } from '../types';
+import { EmbedComponent, IEmbedElement, RenderTextFn } from '../types';
 
 export interface EmbedLineBreak extends IEmbedElement {
     type: 'br';
     props: {
-        children: [];
+        children?: [];
     };
 }
 
 export const renderLineBreak: RenderTextFn<EmbedLineBreak> = () => '\n';
 
-export const br = (): EmbedLineBreak => {
+export const br: EmbedComponent<EmbedLineBreak> = () => {
     return {
         type: 'br',
         props: {

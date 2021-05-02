@@ -1,6 +1,6 @@
-import { IEmbedElement } from '../types';
+import { EmbedComponent, IEmbedElement, RenderChildFn } from '../types';
 
-export interface AuthorElement extends IEmbedElement {
+export interface EmbedAuthor extends IEmbedElement {
     type: 'author';
     props: {
         name: string[];
@@ -10,7 +10,12 @@ export interface AuthorElement extends IEmbedElement {
     };
 }
 
-export const author = ({ name, iconURL, url }: { name?: string[]; iconURL?: string; url?: string }): AuthorElement => {
+export const renderAuthor: RenderChildFn<EmbedAuthor> = (el) => {
+    const { name, iconURL, url } = el.props;
+    return (embed) => embed.setAuthor(name, iconURL, url);
+};
+
+export const author: EmbedComponent<EmbedAuthor> = ({ name, iconURL, url }) => {
     return {
         type: 'author',
         props: {
