@@ -1,4 +1,4 @@
-import { IEmbedElement } from '../types';
+import { IEmbedElement, RenderTextFn } from '../types';
 
 export interface EmbedLineBreak extends IEmbedElement {
     type: 'br';
@@ -6,6 +6,8 @@ export interface EmbedLineBreak extends IEmbedElement {
         children: [];
     };
 }
+
+export const renderLineBreak: RenderTextFn<EmbedLineBreak> = () => '\n';
 
 export const br = (): EmbedLineBreak => {
     return {

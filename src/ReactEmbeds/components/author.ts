@@ -1,6 +1,6 @@
 import { IEmbedElement } from '../types';
 
-export interface EmbedAuthor extends IEmbedElement {
+export interface AuthorElement extends IEmbedElement {
     type: 'author';
     props: {
         name: string[];
@@ -10,7 +10,7 @@ export interface EmbedAuthor extends IEmbedElement {
     };
 }
 
-export const author = ({ name, iconURL, url }: { name?: string[]; iconURL?: string; url?: string }): EmbedAuthor => {
+export const author = ({ name, iconURL, url }: { name?: string[]; iconURL?: string; url?: string }): AuthorElement => {
     return {
         type: 'author',
         props: {

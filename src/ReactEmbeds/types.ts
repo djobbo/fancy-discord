@@ -1,3 +1,4 @@
+import { MessageEmbed } from 'discord.js';
 import {
     EmbedWrapper,
     EmbedTitle,
@@ -24,3 +25,6 @@ export type EmbedElement = EmbedWrapper | EmbedChildElement;
 export type EmbedTextElement = string | EmbedLineBreak | EmbedSpan | EmbedLink | EmbedTextElement[];
 
 export type EmbedComponent<T extends EmbedWrapper | EmbedChildElement> = (props: T['props']) => T;
+
+export type RenderChildFn<T extends EmbedChildElement | EmbedChildElement[]> = (el: T) => (embed: MessageEmbed) => void;
+export type RenderTextFn<T extends EmbedTextElement> = (el: T) => string;

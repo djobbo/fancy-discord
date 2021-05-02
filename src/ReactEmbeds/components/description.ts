@@ -1,4 +1,5 @@
-import { EmbedTextElement, IEmbedElement } from '../types';
+import { renderTextElementGroup } from '../createEmbed';
+import { EmbedTextElement, IEmbedElement, RenderChildFn } from '../types';
 
 export interface EmbedDescription extends IEmbedElement {
     type: 'description';
@@ -6,6 +7,9 @@ export interface EmbedDescription extends IEmbedElement {
         children: EmbedTextElement[];
     };
 }
+
+export const renderDescription: RenderChildFn<EmbedDescription> = (el) => (embed) =>
+    embed.setDescription(renderTextElementGroup(el.props.children));
 
 export const description = ({ children }: { children?: EmbedTextElement[] }): EmbedDescription => {
     return {

@@ -1,4 +1,4 @@
-import { IEmbedElement } from '../types';
+import { IEmbedElement, RenderChildFn } from '../types';
 
 export interface EmbedColor extends IEmbedElement {
     type: 'color';
@@ -7,6 +7,8 @@ export interface EmbedColor extends IEmbedElement {
         children: [];
     };
 }
+
+export const renderColor: RenderChildFn<EmbedColor> = (el) => (embed) => embed.setColor(el.props.hex);
 
 export const color = ({ hex }: { hex: string }): EmbedColor => {
     return {
