@@ -29,5 +29,3 @@ export const TestEmbed = ({ color, title, name, repeat }: TestEmbedProps): Embed
         ))}
     </Embed.wrapper>
 );
-
-// console.log(createEmbed(<TestEmbed color="#dd2222" title="EZ" name="JAAJ" repeat={3} />));
