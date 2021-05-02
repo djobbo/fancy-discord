@@ -15,6 +15,9 @@ client.cmd('say [text]', ({ query, message: { channel, author } }) => {
         <TestEmbed color="#dd2222" title={text ?? 'No Text :('} name={author.username} repeat={3} />,
     );
     channel.send(embed);
+
+    const embed2 = createEmbed(<TestEmbed color="#2299dd" title="HAHAHA" name={author.presence.status} repeat={2} />);
+    channel.send(embed2);
 });
 
 client.on('ready', () => {

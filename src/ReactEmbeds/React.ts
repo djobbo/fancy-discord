@@ -1,5 +1,6 @@
 import { EmbedComponent, EmbedElement } from './types';
 export * as Embed from './components';
+export * from './createEmbed';
 
 const createElement = <T extends EmbedElement, FC extends EmbedComponent<T>>(
     el: FC,
