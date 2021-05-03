@@ -11,11 +11,11 @@ export interface EmbedDescription extends IEmbedElement {
 export const renderDescription: RenderChildFn<EmbedDescription> = (el) => (embed) =>
     embed.setDescription(renderTextElementGroup(el.props.children));
 
-export const description = ({ children }: { children?: EmbedTextElement[] }): EmbedDescription => {
+export const Description = ({ children }: { children?: EmbedTextElement[] }): EmbedDescription => {
     return {
         type: 'description',
         props: {
-            children: children ?? [''],
+            children: children ?? [],
         },
         key: null,
     };

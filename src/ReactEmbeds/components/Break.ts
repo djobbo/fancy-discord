@@ -9,7 +9,7 @@ export interface EmbedLineBreak extends IEmbedElement {
 
 export const renderLineBreak: RenderTextFn<EmbedLineBreak> = () => '\n';
 
-export const br: EmbedComponent<EmbedLineBreak> = () => {
+export const Break: EmbedComponent<EmbedLineBreak> = () => {
     return {
         type: 'br',
         props: {

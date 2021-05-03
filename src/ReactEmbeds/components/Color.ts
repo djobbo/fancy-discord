@@ -10,7 +10,7 @@ export interface EmbedColor extends IEmbedElement {
 
 export const renderColor: RenderChildFn<EmbedColor> = (el) => (embed) => embed.setColor(el.props.hex);
 
-export const color = ({ hex }: { hex: string }): EmbedColor => {
+export const Color = ({ hex }: { hex: string }): EmbedColor => {
     return {
         type: 'color',
         props: {

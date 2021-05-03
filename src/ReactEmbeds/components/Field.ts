@@ -15,7 +15,7 @@ export const renderField: RenderChildFn<EmbedField> = (el) => {
     return (embed) => embed.addField(renderTextElementGroup(title), renderTextElementGroup(children), inline);
 };
 
-export const field = ({
+export const Field = ({
     children,
     title,
     inline = false,
@@ -27,7 +27,7 @@ export const field = ({
     return {
         type: 'field',
         props: {
-            children: children ?? [''],
+            children: children ?? [],
             title: typeof title === 'string' ? [title] : title,
             inline,
         },
