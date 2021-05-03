@@ -12,7 +12,7 @@ export interface EmbedLink extends IEmbedElement {
 export const renderLink: RenderTextFn<EmbedLink> = (el) =>
     `[${renderTextElementGroup(el.props.children)}](${el.props.href})`;
 
-export const link = ({ children, href }: { children?: EmbedTextElement[]; href: string }): EmbedLink => {
+export const Link = ({ children, href }: { children?: EmbedTextElement[]; href: string }): EmbedLink => {
     return {
         type: 'link',
         props: {

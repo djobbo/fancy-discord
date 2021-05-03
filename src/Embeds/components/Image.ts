@@ -13,7 +13,7 @@ export const renderImage: RenderChildFn<EmbedImage> = (el) => {
     return (embed) => embed.setImage(url);
 };
 
-export const image = ({ url }: { url: string }): EmbedImage => {
+export const Image = ({ url }: { url: string }): EmbedImage => {
     return {
         type: 'image',
         props: {

@@ -1,4 +1,18 @@
-import { React, Embed } from '../../lib';
+import {
+    Author,
+    Break,
+    Color,
+    Description,
+    EmbedWrapper,
+    Field,
+    Footer,
+    Image,
+    Link,
+    React,
+    Span,
+    Title,
+    Wrapper,
+} from '../../lib/Embeds';
 
 interface TestEmbedProps {
     color: string;
@@ -8,28 +22,27 @@ interface TestEmbedProps {
     icon?: string | null;
 }
 
-export const TestEmbed = ({ color, title, name, repeat, icon }: TestEmbedProps): Embed.EmbedWrapper => (
-    <Embed.wrapper>
-        <Embed.title>{title}</Embed.title>
-        <Embed.color hex={color} />
-        <Embed.author />
-        <Embed.description>
-            <Embed.span bold italic>
+export const TestEmbed = ({ color, title, name, repeat, icon }: TestEmbedProps): EmbedWrapper => (
+    <Wrapper>
+        <Title>{title}</Title>
+        <Color hex={color} />
+        <Author name={name} />
+        <Description>
+            <Span bold italic>
                 Yo
-            </Embed.span>{' '}
+            </Span>{' '}
             c'est une
-            <Embed.br />
-            description de fou {name}! <Embed.span bold>Bold</Embed.span>
-        </Embed.description>
-        {icon && <Embed.image url={icon} />}
+            <Break />
+            description de fou {name}! <Span bold>Bold</Span>
+        </Description>
+        {icon && <Image url={icon} />}
         {Array.from({ length: repeat }, (_, i) => (
-            <Embed.field title={`Field Title ${i}`} inline={i < 2}>
+            <Field title={`Field Title ${i}`} inline={i < 2}>
                 XD
-                <Embed.br />
-                <Embed.span italic>Italic!!! {name}</Embed.span>{' '}
-                <Embed.link href="https://google.com">Hello</Embed.link>
-            </Embed.field>
+                <Break />
+                <Span italic>Italic!!! {name}</Span> <Link href="https://google.com">Hello</Link>
+            </Field>
         ))}
-        <Embed.footer iconUrl={icon || undefined}>This is a footer</Embed.footer>
-    </Embed.wrapper>
+        <Footer iconUrl={icon || undefined}>This is a footer</Footer>
+    </Wrapper>
 );

@@ -7,7 +7,7 @@ export interface EmbedWrapper extends IEmbedElement {
     };
 }
 
-export const wrapper = ({ children }: { children?: EmbedChildElement[] }): EmbedWrapper => {
+export const Wrapper = ({ children }: { children?: EmbedChildElement[] }): EmbedWrapper => {
     return {
         type: 'wrapper',
         props: {

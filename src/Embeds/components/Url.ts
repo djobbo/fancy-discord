@@ -13,7 +13,7 @@ export const renderUrl: RenderChildFn<EmbedURL> = (el) => {
     return (embed) => embed.setURL(renderTextElementGroup(children));
 };
 
-export const url = ({ children }: { children?: string[] }): EmbedURL => {
+export const Url = ({ children }: { children?: string[] }): EmbedURL => {
     return {
         type: 'url',
         props: {

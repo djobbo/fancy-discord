@@ -18,7 +18,7 @@ export const renderSpan: RenderTextFn<EmbedSpan> = (el) => {
     return outStr;
 };
 
-export const span = ({
+export const Span = ({
     children,
     bold = false,
     italic = false,

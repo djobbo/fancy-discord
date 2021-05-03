@@ -13,7 +13,7 @@ export const renderTimestamp: RenderChildFn<EmbedTimestamp> = (el) => {
     return (embed) => embed.setTimestamp(timestamp);
 };
 
-export const timestamp = ({ timestamp }: { timestamp: number | Date }): EmbedTimestamp => {
+export const Timestamp = ({ timestamp }: { timestamp: number | Date }): EmbedTimestamp => {
     return {
         type: 'timestamp',
         props: {

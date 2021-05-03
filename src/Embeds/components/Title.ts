@@ -11,7 +11,7 @@ export interface EmbedTitle extends IEmbedElement {
 export const renderTitle: RenderChildFn<EmbedTitle> = (el) => (embed) =>
     embed.setTitle(renderTextElementGroup(el.props.children));
 
-export const title = ({ children }: { children?: EmbedTextElement[] }): EmbedTitle => {
+export const Title = ({ children }: { children?: EmbedTextElement[] }): EmbedTitle => {
     return {
         type: 'title',
         props: {
