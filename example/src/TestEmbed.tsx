@@ -26,7 +26,7 @@ export const TestEmbed = ({ color, title, name, repeat, icon }: TestEmbedProps):
     <Wrapper>
         <Title>{title}</Title>
         <Color hex={color} />
-        <Author name={name} />
+        <Author name={`Author: ${name}`} />
         <Description>
             <Span bold italic>
                 Yo

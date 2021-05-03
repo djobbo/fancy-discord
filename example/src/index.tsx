@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
-import { Client, createEmbed, React } from '../../lib';
+import { Client } from '../../lib';
+import { React, createEmbed } from '../../lib/Embeds';
 import { TestEmbed } from './TestEmbed';
 
 config();
