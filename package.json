@@ -1,6 +1,6 @@
 {
     "name": "fancy-discord.js",
-    "version": "0.3.1",
+    "version": "0.4.0",
     "description": "discord.js, but fancier.",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
