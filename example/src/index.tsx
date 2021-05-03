@@ -9,7 +9,7 @@ const { DISCORD_TOKEN } = process.env;
 
 const client = new Client({ commandPrefix: '!' });
 
-client.cmd('say [text]', ({ query, message: { channel, author } }) => {
+client.cmd('say [text]', async ({ query, message: { channel, author } }) => {
     const { text } = query;
 
     const avatar = author.avatarURL();
@@ -18,9 +18,18 @@ client.cmd('say [text]', ({ query, message: { channel, author } }) => {
         <TestEmbed color="#dd2222" title={text ?? 'No Text :('} name={author.username} repeat={2} icon={avatar} />,
     );
 
-    // embed.setFooter('sad', avatar ?? undefined);
+    try {
+        const msg = await channel.send(embed);
 
-    channel.send(embed);
+        const emojis = ['😀', '🥴'];
+        client.addReactions(msg, emojis);
+
+        client.onReactionAdd([msg.id], emojis, ({ reaction, user }) => {
+            user.send(reaction.emoji.name);
+        });
+    } catch (e) {
+        console.error(e);
+    }
 });
 
 client.on('ready', () => {

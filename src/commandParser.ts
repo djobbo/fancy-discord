@@ -1,25 +1,16 @@
-import {
-    CommandArgValidator,
-    CommandCallback,
-    CommandQuery,
-    CommandQueryBuilderReducer,
-    CommandQueryBuilder,
-} from './types';
+import { CommandArgValidator, CommandQuery, CommandQueryBuilderReducer, CommandQueryBuilder } from './types';
 
 export const commandParser = (
     path: string,
-    ...callbacks: CommandCallback[]
 ): {
     validators: CommandArgValidator[];
     queryBuilder: CommandQueryBuilder;
-    callbackSuite: CommandCallback;
 } => {
     const pathArgs = path.split(' ');
 
     return {
         validators: getValidators(pathArgs),
         queryBuilder: getQueryBuilder(pathArgs),
-        callbackSuite: getCallbackSuite(callbacks),
     };
 };
 
@@ -54,9 +45,3 @@ export const getQueryBuilderReducer = (pathArg: string): CommandQueryBuilderRedu
 
 export const getQueryBuilder = (pathArgs: string[]): CommandQueryBuilder =>
     pathArgs.map<CommandQueryBuilderReducer>(getQueryBuilderReducer, {});
-
-export const getCallbackSuite = (callbacks: CommandCallback[]): CommandCallback => (req) =>
-    callbacks.reduceRight<CommandCallback>(
-        (callback, current) => () => current(req, () => callback(req)),
-        () => ({}),
-    )(req);
