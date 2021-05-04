@@ -6,7 +6,7 @@ const testFieldObj: EmbedField = {
     type: 'field',
     props: {
         title: ['a title'],
-        children: ['hello'],
+        children: [['hello']],
         inline: false,
     },
     key: null,
@@ -16,7 +16,7 @@ const testEmptyFieldObj: EmbedField = {
     type: 'field',
     props: {
         title: ['another title'],
-        children: [],
+        children: [[]],
         inline: false,
     },
     key: null,
@@ -26,7 +26,7 @@ const testEmptyTitleObj: EmbedField = {
     type: 'field',
     props: {
         title: [''],
-        children: ['hii'],
+        children: [['hii']],
         inline: false,
     },
     key: null,
@@ -36,7 +36,7 @@ const testInlineFieldObj: EmbedField = {
     type: 'field',
     props: {
         title: ['inlinee'],
-        children: ['a'],
+        children: [['a']],
         inline: true,
     },
     key: null,
@@ -65,7 +65,7 @@ describe('Embed Field', () => {
 
     describe('Empty Field Content', () => {
         it('creates object', () => {
-            const fieldObj = Field({ title: 'another title' });
+            const fieldObj = Field({ title: 'another title', children: [] });
             expect(fieldObj).toStrictEqual(testEmptyFieldObj);
         });
 

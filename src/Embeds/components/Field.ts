@@ -1,4 +1,4 @@
-import { renderTextElementGroup } from '../createEmbed';
+import { renderTextElement } from '../createEmbed';
 import { IEmbedElement, EmbedTextElement, RenderChildFn } from '../types';
 
 export interface EmbedField extends IEmbedElement {
@@ -12,7 +12,7 @@ export interface EmbedField extends IEmbedElement {
 
 export const renderField: RenderChildFn<EmbedField> = (el) => {
     const { title, children, inline } = el.props;
-    return (embed) => embed.addField(renderTextElementGroup(title), renderTextElementGroup(children), inline);
+    return (embed) => embed.addField(renderTextElement(title), renderTextElement(children), inline);
 };
 
 export const Field = ({
@@ -20,15 +20,15 @@ export const Field = ({
     title,
     inline = false,
 }: {
-    children?: EmbedTextElement[];
-    title: string | EmbedTextElement[];
+    children?: EmbedTextElement;
+    title: EmbedTextElement;
     inline?: boolean;
 }): EmbedField => {
     return {
         type: 'field',
         props: {
-            children: children ?? [],
-            title: typeof title === 'string' ? [title] : title,
+            children: children ? [children] : [],
+            title: [title],
             inline,
         },
         key: null,

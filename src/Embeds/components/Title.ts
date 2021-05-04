@@ -1,5 +1,5 @@
 import { IEmbedElement, EmbedTextElement, RenderChildFn } from '../types';
-import { renderTextElementGroup } from '../createEmbed';
+import { renderTextElement } from '../createEmbed';
 
 export interface EmbedTitle extends IEmbedElement {
     type: 'title';
@@ -9,13 +9,13 @@ export interface EmbedTitle extends IEmbedElement {
 }
 
 export const renderTitle: RenderChildFn<EmbedTitle> = (el) => (embed) =>
-    embed.setTitle(renderTextElementGroup(el.props.children));
+    embed.setTitle(renderTextElement(el.props.children));
 
-export const Title = ({ children }: { children?: EmbedTextElement[] }): EmbedTitle => {
+export const Title = ({ children }: { children?: EmbedTextElement }): EmbedTitle => {
     return {
         type: 'title',
         props: {
-            children: children ?? [''],
+            children: children ? [children] : [''],
         },
         key: null,
     };

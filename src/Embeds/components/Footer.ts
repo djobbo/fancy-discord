@@ -1,5 +1,5 @@
-import { renderTextElementGroup } from '../createEmbed';
-import { IEmbedElement, EmbedTextElement, RenderChildFn, EmbedComponent } from '../types';
+import { renderTextElement } from '../createEmbed';
+import { IEmbedElement, EmbedTextElement, RenderChildFn } from '../types';
 
 export interface EmbedFooter extends IEmbedElement {
     type: 'footer';
@@ -11,15 +11,15 @@ export interface EmbedFooter extends IEmbedElement {
 
 export const renderFooter: RenderChildFn<EmbedFooter> = (el) => {
     const { children, iconUrl } = el.props;
-    return (embed) => embed.setFooter(renderTextElementGroup(children), iconUrl);
+    return (embed) => embed.setFooter(renderTextElement(children), iconUrl);
 };
 
-export const Footer: EmbedComponent<EmbedFooter> = ({ children = [''], ...props }) => {
+export const Footer = ({ children, iconUrl }: { children?: EmbedTextElement; iconUrl: string }): EmbedFooter => {
     return {
         type: 'footer',
         props: {
-            children,
-            ...props,
+            children: children ? [children] : [],
+            iconUrl,
         },
         key: null,
     };

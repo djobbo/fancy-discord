@@ -5,7 +5,7 @@ import { Description, renderDescription, EmbedDescription } from './Description'
 const testEmptyDescriptionObj: EmbedDescription = {
     type: 'description',
     props: {
-        children: [],
+        children: [[]],
     },
     key: null,
 };
@@ -13,14 +13,14 @@ const testEmptyDescriptionObj: EmbedDescription = {
 const testDescriptionObj: EmbedDescription = {
     type: 'description',
     props: {
-        children: ['hello'],
+        children: [['hello']],
     },
     key: null,
 };
 
 describe('Embed Description', () => {
     it('creates empty description object', () => {
-        const descriptionObj = Description({});
+        const descriptionObj = Description({ children: [] });
         expect(descriptionObj).toStrictEqual(testEmptyDescriptionObj);
     });
 

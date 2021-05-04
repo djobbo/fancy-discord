@@ -66,6 +66,9 @@ export const renderChild: RenderChildFn<EmbedChildElement | EmbedChildElement[]>
 
 export const createEmbed = (el: EmbedWrapper): MessageEmbed => {
     const embed = new MessageEmbed({});
-    el.props.children.forEach((child) => renderChild(child)(embed));
+
+    if (Array.isArray(el.props.children)) el.props.children.forEach((child) => renderChild(child)(embed));
+    else renderChild(el.props.children)(embed);
+
     return embed;
 };

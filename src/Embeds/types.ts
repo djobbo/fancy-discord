@@ -15,12 +15,12 @@ import {
     EmbedFooter,
 } from './components';
 
-type Key = string | null;
+type Key = string | number | null;
 
 export interface IEmbedElement {
     type: string;
     props: {
-        children?: unknown[];
+        children?: [] | EmbedTextElement[] | EmbedChildElement[];
     };
     key: Key;
 }
