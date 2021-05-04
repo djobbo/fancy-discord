@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Number support in Embed Text Elements
+-   Support for Embed fragments (`<Wrapper>{/* Any Child Element */}</Wrapper>`)
+
+### Changed
+
+-   Embed Footer `iconUrl` is now optional
+
 ## [0.5.0] - 2021-06-04
 
 ### Added

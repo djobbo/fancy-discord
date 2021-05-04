@@ -17,11 +17,13 @@ import {
 
 import { EmbedChildElement, EmbedTextElement, RenderChildFn, RenderTextFn } from './types';
 
-export const renderTextElementGroup = (textElGroup: EmbedTextElement[]): string =>
+export const renderTextElementGroup: RenderTextFn<EmbedTextElement[]> = (textElGroup): string =>
     textElGroup.map(renderTextElement).join('');
 
 export const renderTextElement: RenderTextFn<EmbedTextElement> = (el): string => {
     if (typeof el === 'string') return el;
+
+    if (typeof el === 'number') return el.toString();
 
     if (Array.isArray(el)) return renderTextElementGroup(el);
 
@@ -37,8 +39,11 @@ export const renderTextElement: RenderTextFn<EmbedTextElement> = (el): string =>
     }
 };
 
+export const renderChildren: RenderChildFn<EmbedChildElement[]> = (el) => (embed) =>
+    el.forEach((child) => renderChild(child)(embed));
+
 export const renderChild: RenderChildFn<EmbedChildElement | EmbedChildElement[]> = (el) => {
-    if (Array.isArray(el)) return (embed) => el.forEach((child) => renderChild(child)(embed));
+    if (Array.isArray(el)) return renderChildren(el);
 
     switch (el.type) {
         case 'author':
@@ -59,6 +64,8 @@ export const renderChild: RenderChildFn<EmbedChildElement | EmbedChildElement[]>
             return renderTitle(el);
         case 'url':
             return renderUrl(el);
+        case 'wrapper':
+            return renderChild(el.props.children);
         default:
             return (embed) => embed;
     }
@@ -67,8 +74,7 @@ export const renderChild: RenderChildFn<EmbedChildElement | EmbedChildElement[]>
 export const createEmbed = (el: EmbedWrapper): MessageEmbed => {
     const embed = new MessageEmbed({});
 
-    if (Array.isArray(el.props.children)) el.props.children.forEach((child) => renderChild(child)(embed));
-    else renderChild(el.props.children)(embed);
+    renderChild(el.props.children)(embed);
 
     return embed;
 };

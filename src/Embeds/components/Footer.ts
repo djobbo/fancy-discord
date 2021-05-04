@@ -14,7 +14,7 @@ export const renderFooter: RenderChildFn<EmbedFooter> = (el) => {
     return (embed) => embed.setFooter(renderTextElement(children), iconUrl);
 };
 
-export const Footer = ({ children, iconUrl }: { children?: EmbedTextElement; iconUrl: string }): EmbedFooter => {
+export const Footer = ({ children, iconUrl }: { children?: EmbedTextElement; iconUrl?: string }): EmbedFooter => {
     return {
         type: 'footer',
         props: {

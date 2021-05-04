@@ -20,7 +20,7 @@ type Key = string | number | null;
 export interface IEmbedElement {
     type: string;
     props: {
-        children?: [] | EmbedTextElement[] | EmbedChildElement[];
+        children?: EmbedTextElement[] | EmbedChildElement[];
     };
     key: Key;
 }
@@ -34,11 +34,14 @@ export type EmbedChildElement =
     | EmbedTimestamp
     | EmbedURL
     | EmbedAuthor
-    | EmbedFooter;
+    | EmbedFooter
+    | EmbedWrapper;
 
 export type EmbedElement = EmbedWrapper | EmbedChildElement;
 export type EmbedTextComponent = EmbedLineBreak | EmbedSpan | EmbedLink;
-export type EmbedTextElement = string | EmbedTextComponent | EmbedTextElement[];
+export type EmbedTextElement = string | number | EmbedTextComponent | EmbedTextElement[];
+
+// type tejhasd<T extends { bruh: string } | undefined> = T extends undefined ? undefined : { xd: T['bruh'] };
 
 export type EmbedComponent<T extends EmbedWrapper | EmbedChildElement | EmbedTextComponent> = (
     props: Omit<T['props'], 'children'> & { children?: T['props']['children'] },

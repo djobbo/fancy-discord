@@ -43,6 +43,9 @@ export const TestEmbed = ({ color, title, name, repeat, icon }: TestEmbedProps):
                 <Span italic>Italic!!! {name}</Span> <Link href="https://google.com">Hello</Link>
             </Field>
         ))}
+        <Wrapper>
+            <Field title="xd">xd</Field>
+        </Wrapper>
         <Footer iconUrl={icon || undefined}>This is a footer</Footer>
     </Wrapper>
 );
