@@ -52,6 +52,8 @@
     },
     "homepage": "https://github.com/AlfieGoldson/fancy-discord#readme",
     "files": [
-        "lib/**/*"
+        "lib/**/*",
+        "embeds.js",
+        "embeds.d.ts"
     ]
 }

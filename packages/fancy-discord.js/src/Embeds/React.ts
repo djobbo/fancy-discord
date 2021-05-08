@@ -197,3 +197,5 @@ export const createEmbed = (el: Element): MessageEmbed => {
 export const React = {
     createElement,
 };
+
+export default createEmbed;

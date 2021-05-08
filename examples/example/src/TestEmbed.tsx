@@ -1,4 +1,4 @@
-import { React, createEmbed } from 'fancy-discord.js/lib/Embeds';
+import { React, createEmbed } from 'fancy-discord.js/embeds';
 
 console.log(
     createEmbed(
