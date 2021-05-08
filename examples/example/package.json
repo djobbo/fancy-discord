@@ -1,6 +1,6 @@
 {
     "name": "example",
-    "version": "1.0.0",
+    "version": "0.7.0",
     "main": "index.js",
     "license": "MIT",
     "private": true,
@@ -15,6 +15,6 @@
         "typescript": "^4.3.0-beta"
     },
     "dependencies": {
-        "fancy-discord.js": "0.6.0"
+        "fancy-discord.js": "^0.7.0"
     }
 }
