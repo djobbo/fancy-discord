@@ -3,5 +3,13 @@
     "workspaces": [
         "packages/*",
         "examples/*"
-    ]
+    ],
+    "scripts": {
+        "lerna": "lerna",
+        "build": "lerna run build",
+        "test": "lerna run test"
+    },
+    "devDependencies": {
+        "lerna": "^4.0.0"
+    }
 }
