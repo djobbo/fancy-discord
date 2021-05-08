@@ -29,7 +29,8 @@
         "prepublishOnly": "yarn test && yarn lint",
         "preversion": "yarn test && yarn lint",
         "version": "yarn lint && git add -A src",
-        "postversion": "git push && git push --tags"
+        "postversion": "git push && git push --tags",
+        "pub:release": "npm publish"
     },
     "devDependencies": {
         "@types/jest": "^26.0.23",
