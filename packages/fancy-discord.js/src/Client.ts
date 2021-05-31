@@ -50,9 +50,15 @@ export class Client extends DiscordClient {
         });
     }
 
-    addReactions(message: Message, emojis: string[]): void {
+    async addReactions(message: Message, emojis: string[]): Promise<void> {
         for (const emoji of emojis) {
-            message.react(emoji);
+            try {
+                await message.react(emoji);
+            } catch {
+                const customEmoji = this.emojis.cache.find((_emogi) => _emogi.name === emoji);
+                if (!customEmoji) throw new Error(`Couldn't find emoji "${emoji}"`);
+                await message.react(customEmoji);
+            }
         }
     }
 }

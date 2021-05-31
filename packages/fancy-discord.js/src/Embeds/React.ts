@@ -10,6 +10,8 @@ declare global {
 type Element =
     | string
     | number
+    | undefined
+    | null
     | {
           type: string;
           props: Record<string, unknown> & { children: Element[] };
@@ -149,6 +151,8 @@ function createElement(
 }
 
 function renderElement(el: Element, embed: MessageEmbedResult): MessageEmbedResult {
+    if (!el) return embed;
+
     if (typeof el !== 'object') return embed + el.toString();
 
     if (Array.isArray(el)) return renderGroupElement(el, embed);

@@ -6,7 +6,7 @@
     "private": true,
     "scripts": {
         "start": "ts-node src/index.tsx",
-        "dev": "ts-node-dev src/TestEmbed.tsx"
+        "dev": "ts-node-dev src/index.tsx"
     },
     "devDependencies": {
         "dotenv": "^8.2.0",

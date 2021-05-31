@@ -55,6 +55,8 @@
     "files": [
         "lib/**/*",
         "embeds.js",
-        "embeds.d.ts"
+        "embeds.d.ts",
+        "emojis.js",
+        "emojis.d.ts"
     ]
 }
